@@ -1,11 +1,10 @@
 import React from "react";
-import ReactDOM from "react-dom"; // Import ReactDOM from "react-dom"
-import "./index.css";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter as Router } from "react-router-dom";
-import { Amplify } from "aws-amplify"; // Add this line
-import config from "./config"; // Add this line
+import { Amplify } from "aws-amplify"; // Import Amplify
+import config from "./config"; // Import the config file
 
 // Initialize AWS Amplify
 Amplify.configure({
@@ -32,13 +31,14 @@ Amplify.configure({
   },
 });
 
-ReactDOM.render(
+const rootElement = document.getElementById("root");
+
+createRoot(rootElement).render(
   <React.StrictMode>
     <Router>
       <App />
     </Router>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );
 
 reportWebVitals();

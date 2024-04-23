@@ -1,16 +1,37 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Switch } from "react-router-dom";
+import AuthenticatedRoute from "./components/AuthenticatedRoute";
+import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
 import Home from "./containers/Home";
-import NotFound from "./containers/NotFound"; // Update import path
-import Login from "./containers/Login"; // This line already includes the import for Login
+import NotFound from "./containers/NotFound";
+import Login from "./containers/Login";
+import Signup from "./containers/Signup";
+import NewNote from "./containers/NewNote";
+import Notes from "./containers/Notes";
+import Settings from "./containers/Settings";
 
-export default function MyRoutes() {
+export default function Routes() {
   return (
-    <Routes>
-      <Route exact path="/" element={<Home />} />
-      <Route exact path="/login" element={<Login />} />
-      {/* Finally, catch all unmatched routes */}
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <Switch>
+      <AuthenticatedRoute exact path="/">
+        <Home />
+      </AuthenticatedRoute>
+      <UnauthenticatedRoute exact path="/login">
+        <Login />
+      </UnauthenticatedRoute>
+      <UnauthenticatedRoute exact path="/signup">
+        <Signup />
+      </UnauthenticatedRoute>
+      <AuthenticatedRoute exact path="/notes/new">
+        <NewNote />
+      </AuthenticatedRoute>
+      <AuthenticatedRoute exact path="/notes/:id">
+        <Notes />
+      </AuthenticatedRoute>
+      <AuthenticatedRoute exact path="/settings">
+        <Settings />
+      </AuthenticatedRoute>
+      <NotFound />
+    </Switch>
   );
 }

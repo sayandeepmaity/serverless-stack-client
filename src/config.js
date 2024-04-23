@@ -1,4 +1,5 @@
 const config = {
+  MAX_ATTACHMENT_SIZE: 5000000, // 5MB
   s3: {
     REGION: "us-east-1",
     BUCKET: "notes-api-prod-serverlessdeploymentbucket-bzzecg2v5vih",
@@ -9,8 +10,8 @@ const config = {
   },
   cognito: {
     REGION: "us-east-1",
-    USER_POOL_ID: "us-east-1_SYu1M8YLq",
-    APP_CLIENT_ID: "7j1b1f1vrsck50pbpv5pfkf86h",
+    USER_POOL_ID: "us-east-1_SzYYjoopX",
+    APP_CLIENT_ID: "76fefkq6rhkj7na7o6ieclj9uc",
     IDENTITY_POOL_ID: "us-east-1:8b993d69-8249-4053-b699-681d82eef895",
   },
 };
