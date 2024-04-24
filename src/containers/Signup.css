@@ -1,3 +1,35 @@
+.Signup {
+  padding: 60px 0;
+}
+
+.Signup form {
+  margin: 0 auto;
+  max-width: 360px; /* Increased width to 360px */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.Signup form input[type="text"],
+.Signup form input[type="email"],
+.Signup form input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.Signup form button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ffff00; /* Changed background color to yellow */
+  color: black; /* Changed text color to black */
+  cursor: pointer;
+}
+
 @media all and (min-width: 480px) {
   .Signup {
     padding: 60px 0;
@@ -5,6 +37,10 @@
 
   .Signup form {
     margin: 0 auto;
-    max-width: 320px;
+    max-width: 360px; /* Increased width to 360px */
+    padding: 20px;
+    border: 1px solid #dada13;
+    border-radius: 5px;
+    background-color: #dada13;
   }
 }

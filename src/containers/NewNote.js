@@ -55,7 +55,7 @@ export default function NewNote({ history }) {
             value={content}
             as="textarea"
             onChange={(e) => setContent(e.target.value)}
-            placeholder="Enter your note content here"
+            placeholder="Write your notes here"
           />
         </Form.Group>
         <Form.Group controlId="file">
@@ -74,5 +74,7 @@ export default function NewNote({ history }) {
         </LoaderButton>
       </Form>
     </div>
+
+    
   );
 }

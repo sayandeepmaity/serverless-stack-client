@@ -47,9 +47,13 @@ export default function Home() {
         {notes.map(({ noteId, content, createdAt }) => (
           <LinkContainer key={noteId} to={`/notes/${noteId}`}>
             <ListGroup.Item action>
-              <span className="font-weight-bold">{content.trim().split("\n")[0]}</span>
+              <span className="font-weight-bold">
+                {content.trim().split("\n")[0]}
+              </span>
               <br />
-              <span className="text-muted">Created: {new Date(createdAt).toLocaleString()}</span>
+              <span className="text-muted">
+                Created: {new Date(createdAt).toLocaleString()}
+              </span>
             </ListGroup.Item>
           </LinkContainer>
         ))}
@@ -60,8 +64,10 @@ export default function Home() {
   function renderLander() {
     return (
       <div className="lander">
-        <h1>Scratch</h1>
-        <p className="text-muted">A simple note taking app</p>
+        <h1>NESTOPIA</h1>
+        <p className="text-muted">
+          Build the Perfect Nest for Your Thoughts!
+        </p>
       </div>
     );
   }
@@ -69,11 +75,16 @@ export default function Home() {
   function renderNotes() {
     return (
       <div className="notes">
-        <h2 className="pb-3 mt-4 mb-3 border-bottom">Your Notes</h2>
+        <h2 className="pb-3 mt-4 mb-3 border-bottom">Welcome to the Nest</h2>
+        <h3 className="pb-3 mt-4 mb-3 border-bottom">Unleash your creativity! Create, delete, and edit your notes with ease</h3>
         <ListGroup>{!isLoading && renderNotesList(notes)}</ListGroup>
       </div>
     );
   }
 
-  return <div className="Home">{isAuthenticated ? renderNotes() : renderLander()}</div>;
+  return (
+    <div className="Home">
+      {isAuthenticated ? renderNotes() : renderLander()}
+    </div>
+  );
 }

@@ -22,7 +22,7 @@ function App() {
   async function handleLogout() {
     await Auth.signOut();
     setIsAuthenticated(false);
-    history.push("/login");
+    history.push("/Login");
   }
 
   useEffect(() => {
@@ -50,7 +50,7 @@ function App() {
           <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
             <LinkContainer to="/">
               <Navbar.Brand className="font-weight-bold text-muted">
-                Scratch
+                Nestopia
               </Navbar.Brand>
             </LinkContainer>
             <Navbar.Toggle />
@@ -58,17 +58,17 @@ function App() {
               <Nav activeKey={window.location.pathname}>
                 {isAuthenticated ? (
                   <>
-                    <LinkContainer to="/settings">
+                    <LinkContainer to="/Settings">
                       <Nav.Link>Settings</Nav.Link>
                     </LinkContainer>
                     <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
                   </>
                 ) : (
                   <>
-                    <LinkContainer to="/signup">
+                    <LinkContainer to="/Signup">
                       <Nav.Link>Signup</Nav.Link>
                     </LinkContainer>
-                    <LinkContainer to="/login">
+                    <LinkContainer to="/Login">
                       <Nav.Link>Login</Nav.Link>
                     </LinkContainer>
                   </>
@@ -79,10 +79,10 @@ function App() {
           <AppContext.Provider value={contextValue}>
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/signup" component={Signup} />
-              <Route exact path="/notes/new" component={NewNote} />
-              <Route exact path="/settings" component={Settings} />
+              <Route exact path="/Login" component={Login} />
+              <Route exact path="/Signup" component={Signup} />
+              <Route exact path="/Notes/New" component={NewNote} />
+              <Route exact path="/Settings" component={Settings} />
               <Route component={NotFound} />
             </Switch>
           </AppContext.Provider>

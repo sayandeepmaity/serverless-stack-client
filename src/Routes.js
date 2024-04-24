@@ -16,19 +16,19 @@ export default function Routes() {
       <AuthenticatedRoute exact path="/">
         <Home />
       </AuthenticatedRoute>
-      <UnauthenticatedRoute exact path="/login">
+      <UnauthenticatedRoute exact path="/Login">
         <Login />
       </UnauthenticatedRoute>
-      <UnauthenticatedRoute exact path="/signup">
+      <UnauthenticatedRoute exact path="/Signup">
         <Signup />
       </UnauthenticatedRoute>
-      <AuthenticatedRoute exact path="/notes/new">
+      <AuthenticatedRoute exact path="/Notes/New">
         <NewNote />
       </AuthenticatedRoute>
-      <AuthenticatedRoute exact path="/notes/:id">
+      <AuthenticatedRoute exact path="/Notes/:id">
         <Notes />
       </AuthenticatedRoute>
-      <AuthenticatedRoute exact path="/settings">
+      <AuthenticatedRoute exact path="/Settings">
         <Settings />
       </AuthenticatedRoute>
       <NotFound />

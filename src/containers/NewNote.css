@@ -1,4 +1,7 @@
-.NewNote form textarea {
+.Notes form textarea {
   height: 300px;
   font-size: 1.5rem;
+  background: linear-gradient(to bottom, #ffafbd, #ffc3a0); /* Add your gradient colors here */
+  border: 1px solid #ccc;
+  padding: 10px;
 }
