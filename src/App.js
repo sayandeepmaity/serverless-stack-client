@@ -4,24 +4,19 @@ import { useHistory } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Home from "./containers/Home";
-import NotFound from "./containers/NotFound"; // corrected import path
-import Login from "./containers/Login";
-import Signup from "./containers/Signup";
-import NewNote from "./containers/NewNote";
-import Settings from "./containers/Settings";
+import { BrowserRouter as Router } from "react-router-dom";
+import Routes from "./Routes";
 import { AppContext } from "./libs/contextLib";
 import { Auth } from "aws-amplify";
 
 function App() {
   const history = useHistory();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
 
   async function handleLogout() {
     await Auth.signOut();
-    setIsAuthenticated(false);
+    userHasAuthenticated(false);
     history.push("/Login");
   }
 
@@ -32,7 +27,7 @@ function App() {
   async function onLoad() {
     try {
       await Auth.currentSession();
-      setIsAuthenticated(true);
+      userHasAuthenticated(true);
     } catch (e) {
       if (e !== "No current user") {
         alert(e);
@@ -41,7 +36,7 @@ function App() {
     setIsAuthenticating(false);
   }
 
-  const contextValue = { isAuthenticated, setIsAuthenticated };
+  const contextValue = { isAuthenticated, userHasAuthenticated };
 
   return (
     !isAuthenticating && (
@@ -77,14 +72,7 @@ function App() {
             </Navbar.Collapse>
           </Navbar>
           <AppContext.Provider value={contextValue}>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/Login" component={Login} />
-              <Route exact path="/Signup" component={Signup} />
-              <Route exact path="/Notes/New" component={NewNote} />
-              <Route exact path="/Settings" component={Settings} />
-              <Route component={NotFound} />
-            </Switch>
+            <Routes />
           </AppContext.Provider>
         </Router>
       </div>
