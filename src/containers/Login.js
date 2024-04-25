@@ -27,6 +27,7 @@ export default function Login() {
       userHasAuthenticated(true);
     } catch (e) {
       onError(e);
+      console.log(e);
       setIsLoading(false);
     }
   }

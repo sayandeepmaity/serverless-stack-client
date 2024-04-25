@@ -2,17 +2,17 @@ const config = {
   MAX_ATTACHMENT_SIZE: 5000000, // 5MB
   s3: {
     REGION: "us-east-1",
-    BUCKET: "notes-api-prod-serverlessdeploymentbucket-bzzecg2v5vih",
+    BUCKET: "notes12345",
   },
   apiGateway: {
     REGION: "us-east-1",
-    URL: "https://kytxc4jao2.execute-api.us-east-1.amazonaws.com/prod/",
+    URL: "https://kytxc4jao2.execute-api.us-east-1.amazonaws.com/prod",
   },
   cognito: {
     REGION: "us-east-1",
-    USER_POOL_ID: "us-east-1_SzYYjoopX",
-    APP_CLIENT_ID: "76fefkq6rhkj7na7o6ieclj9uc",
-    IDENTITY_POOL_ID: "us-east-1:8b993d69-8249-4053-b699-681d82eef895",
+    USER_POOL_ID: "us-east-1_SgbF4P0qi",
+    APP_CLIENT_ID: "1kfa6o34lbtl4ge4916fr45ld9",
+    IDENTITY_POOL_ID: "us-east-1:07d44113-3954-4d6b-af9c-4f19363481d0",
   },
 };
 
