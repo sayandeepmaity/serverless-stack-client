@@ -1,0 +1,60 @@
+/* MarioGame.css */
+.MarioGame {
+    position: relative;
+    width: 1110px; /* Change the width as needed */
+    height: 400px; /* Change the height as needed */
+    background-image: url('image/gameb.gif'); /* Specify the path to your background image */
+    background-size: cover; /* Cover the entire game area with the background image */
+    overflow: hidden;
+}
+
+.Mario {
+    position: absolute;
+    bottom: 150px; /* Increase the vertical height from the bottom */
+    left: 100px; /* Adjust the horizontal position */
+    width: 90px; /* Change the width of the icon as needed */
+    height: 90px; /* Change the height of the icon as needed */
+    background-image: url('image/bird_transparent.png'); /* Specify the path to your icon image */
+    background-size: contain; /* Make the icon fit inside the box */
+}
+
+
+.Obstacle {
+    position:absolute;
+    bottom: 2px;
+    width: 100px; /* Change the width of the obstacle icon as needed */
+    height: 100px; /* Change the height of the obstacle icon as needed */
+    background-image: url('image/block.gif'); /* Specify the path to your obstacle image */
+    background-size: contain; /* Make the obstacle icon fit inside the box */
+    background-repeat: no-repeat; /* Prevent the background from repeating */
+    left: 800px; /* Initial position of the obstacle */
+}
+
+.Instructions {
+    font-family: 'Roboto', sans-serif; /* Use Roboto font */
+    text-transform: uppercase; /* Convert text to uppercase */
+    font-weight: bold; /* Set font weight to bold */
+    color: #000000; /* Text color */
+    margin-top: 10px;
+    margin-left: 210px; /* Adjust margin as needed */
+  }
+
+  .PausePlayButton {
+    align-items:center;
+    background-color: #994caf; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 20px; /* Rounded corners */
+  }
+  
+  .PausePlayButton:hover {
+    background-color: #7a45a0; /* Darker green */
+  }
+  

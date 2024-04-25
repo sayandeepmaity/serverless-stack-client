@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
 import Home from "./containers/Home";
@@ -8,14 +8,14 @@ import Login from "./containers/Login";
 import Signup from "./containers/Signup";
 import NewNote from "./containers/NewNote";
 import Notes from "./containers/Notes";
-import Settings from "./containers/Settings";
+import MarioGame from "./containers/MarioGame";
 
 export default function Routes() {
   return (
     <Switch>
-      <AuthenticatedRoute exact path="/">
+      <Route exact path="/">
         <Home />
-      </AuthenticatedRoute>
+      </Route>
       <UnauthenticatedRoute exact path="/Login">
         <Login />
       </UnauthenticatedRoute>
@@ -28,8 +28,8 @@ export default function Routes() {
       <AuthenticatedRoute exact path="/Notes/:id">
         <Notes />
       </AuthenticatedRoute>
-      <AuthenticatedRoute exact path="/Settings">
-        <Settings />
+      <AuthenticatedRoute exact path="/MarioGame">
+        <MarioGame />
       </AuthenticatedRoute>
       <NotFound />
     </Switch>

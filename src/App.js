@@ -42,19 +42,19 @@ function App() {
     !isAuthenticating && (
       <div className="App container py-3">
         <Router>
-          <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
+        <Navbar collapseOnSelect expand="md" className="mb-3 rounded" style={{ backgroundColor:"yellow" }}>
             <LinkContainer to="/">
-              <Navbar.Brand className="font-weight-bold text-muted">
-                Nestopia
-              </Navbar.Brand>
+            <Navbar.Brand className="font-weight-bold text-muted" style={{ color: 'black' }}>
+              Nestopia
+            </Navbar.Brand>
             </LinkContainer>
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">
               <Nav activeKey={window.location.pathname}>
                 {isAuthenticated ? (
                   <>
-                    <LinkContainer to="/Settings">
-                      <Nav.Link>Settings</Nav.Link>
+                    <LinkContainer to="/MarioGame">
+                      <Nav.Link>MarioGame</Nav.Link>
                     </LinkContainer>
                     <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
                   </>

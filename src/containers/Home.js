@@ -74,7 +74,7 @@ export default function Home() {
       <div className="notes">
         <h2 className="pb-3 mt-4 mb-3 border-bottom">Welcome to the Nest</h2>
         <h3 className="pb-3 mt-4 mb-3 border-bottom">Unleash your creativity! Create, delete, and edit your notes with ease</h3>
-        <ListGroup>{!isLoading && renderNotesList(notes)}</ListGroup>
+        <ListGroup className="notes-grid">{!isLoading && renderNotesList(notes)}</ListGroup>
       </div>
     );
   }

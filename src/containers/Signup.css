@@ -20,7 +20,7 @@
   box-sizing: border-box;
 }
 
-.Signup form button {
+.Signup form button:disabled {
   width: 100%;
   padding: 10px;
   border: none;

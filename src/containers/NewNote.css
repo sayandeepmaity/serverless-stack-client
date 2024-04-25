@@ -1,7 +1,8 @@
 .Notes form textarea {
   height: 300px;
   font-size: 1.5rem;
-  background: linear-gradient(to bottom, #ffafbd, #ffc3a0); /* Add your gradient colors here */
-  border: 1px solid #ccc;
+  background: linear-gradient(to bottom, #afa1d3, #b1a6c3); /* Gradient with light colors */
+  border: 5px solid #eded1a; /* Thicker border */
   padding: 10px;
 }
+
