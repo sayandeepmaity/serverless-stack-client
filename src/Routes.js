@@ -1,37 +1,54 @@
 import React from "react";
-import { Switch } from "react-router-dom";
-import AuthenticatedRoute from "./components/AuthenticatedRoute";
-import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
-import Home from "./containers/Home";
+import { Route, Switch } from "react-router-dom";
+ import Home from "./containers/Home";
 import NotFound from "./containers/NotFound";
 import Login from "./containers/Login";
 import Signup from "./containers/Signup";
 import NewNote from "./containers/NewNote";
 import Notes from "./containers/Notes";
 import Settings from "./containers/Settings";
+import AuthenticatedRoute from "./components/AuthenticatedRoute";
+import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
+import ResetPassword from "./containers/ResetPassword";
+import ChangePassword from "./containers/ChangePassword";
+import ChangeEmail from "./containers/ChangeEmail";
+// import FacebookLoginCallback from "./components/FacebookLoginCallback";
 
 export default function Routes() {
   return (
     <Switch>
-      <AuthenticatedRoute exact path="/">
-        <Home />
-      </AuthenticatedRoute>
-      <UnauthenticatedRoute exact path="/Login">
+      <Route exact path="/">
+       <Home />
+      </Route>
+      {/* <Route exact path="/login/callback" component={FacebookLoginCallback} /> */}
+      <UnauthenticatedRoute exact path="/login/reset">
+        <ResetPassword />
+      </UnauthenticatedRoute>
+      <UnauthenticatedRoute exact path="/login">
         <Login />
       </UnauthenticatedRoute>
-      <UnauthenticatedRoute exact path="/Signup">
+      <UnauthenticatedRoute exact path="/signup">
         <Signup />
       </UnauthenticatedRoute>
-      <AuthenticatedRoute exact path="/Notes/New">
-        <NewNote />
-      </AuthenticatedRoute>
-      <AuthenticatedRoute exact path="/Notes/:id">
-        <Notes />
-      </AuthenticatedRoute>
-      <AuthenticatedRoute exact path="/Settings">
+      <AuthenticatedRoute exact path="/settings">
         <Settings />
       </AuthenticatedRoute>
-      <NotFound />
+      <AuthenticatedRoute exact path="/notes/new">
+        <NewNote />
+      </AuthenticatedRoute>
+      <AuthenticatedRoute exact path="/notes/:id">
+        <Notes />
+      </AuthenticatedRoute>
+      <AuthenticatedRoute exact path="/settings/password">
+        <ChangePassword />
+      </AuthenticatedRoute>
+      <AuthenticatedRoute exact path="/settings/email">
+        <ChangeEmail />
+      </AuthenticatedRoute>
+
+      {/* Finally, catch all unmatched routes */}
+      <Route><NotFound /></Route>
+
     </Switch>
   );
 }

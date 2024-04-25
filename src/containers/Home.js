@@ -17,21 +17,18 @@ export default function Home() {
       if (!isAuthenticated) {
         return;
       }
-
       try {
         const notes = await loadNotes();
         setNotes(notes);
       } catch (e) {
         onError(e);
       }
-
       setIsLoading(false);
     }
-
     onLoad();
   }, [isAuthenticated]);
-
-  async function loadNotes() {
+  
+  function loadNotes() {
     return API.get("notes", "/notes");
   }
 
