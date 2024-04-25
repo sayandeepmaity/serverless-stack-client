@@ -1,57 +1,55 @@
-
 .Home .lander {
   padding: 80px 0;
   text-align: center;
-  color: #333; /* Update font color */
+  color: #333;
 }
 
 .Home .lander h1 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: bold;
-  color: #092849; /* Update font color */
+  color: #092849;
 }
 
 .Home .lander p {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: bold;
-  color: #b5ce28; /* Update font color */
+  color: #b5ce28;
 }
 
 .Home .notes {
   padding: 50px;
   color: #000000;
-  background-image: url('image/cort.png'); /* Update font color */
+  background-image: url("image/cort.png");
 }
 
 .Home .notes h2 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: bold;
   margin-top: 40px;
   margin-bottom: 20px;
-  color: #ffffff; /* Update font color */
+  color: #ffffff;
 }
 
 .Home .notes h3 {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: bold;
   margin-top: 20px;
   margin-bottom: 20px;
-  color: #000000; /* Update font color */
+  color: #000000;
 }
 
 .Home .notes .list-group {
   margin-top: 20px;
-  color: #333; /* Update font color */
+  color: #333;
 }
 
 .notes-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columns with equal width */
-  gap: 20px; /* Space between grid items */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 }
 
 .notes-grid .list-group-item {
-  /* Style for each grid item, adjust as needed */
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;

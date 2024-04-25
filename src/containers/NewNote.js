@@ -15,7 +15,7 @@ export default function NewNote({ history }) {
   function validateForm() {
     return content.length > 0;
   }
-  
+
   function handleFileChange(event) {
     file.current = event.target.files[0];
   }
@@ -74,7 +74,5 @@ export default function NewNote({ history }) {
         </LoaderButton>
       </Form>
     </div>
-
-    
   );
 }

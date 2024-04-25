@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./MarioGame.css"; // Import your CSS file with styles for the game
+import "./MarioGame.css";
 
 export default function MarioGame() {
-  const [position, setPosition] = useState({ x: 100, y: 0 }); // Initial position of Mario
+  const [position, setPosition] = useState({ x: 100, y: 0 });
   const gameAreaRef = useRef(null);
   const obstacleRef = useRef(null);
-  const [isJumping, setIsJumping] = useState(false); // State to track jumping
-  const [isFalling, setIsFalling] = useState(false); // State to track falling
-  const [isPaused, setIsPaused] = useState(false); // State to track if the game is paused
-  const jumpHeight = 150; // Change the jump height as needed
-  const obstacleSpeed = 10; // Change the obstacle speed as needed
+  const [isJumping, setIsJumping] = useState(false);
+  const [isFalling, setIsFalling] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const jumpHeight = 150;
+  const obstacleSpeed = 10;
 
   useEffect(() => {
     const handleKeyPress = (e) => {
@@ -54,7 +54,6 @@ export default function MarioGame() {
 
       const moveObstacle = () => {
         if (left <= -200) {
-          // Reset obstacle position when it goes out of the screen
           left = 1000;
           obstacle.style.left = `${left}px`;
         }
@@ -94,17 +93,7 @@ export default function MarioGame() {
         <button className="PausePlayButton" onClick={handlePausePlay}>
           {isPaused ? "Play" : "Pause"}
         </button>
-        <p
-          className="Instructions"
-          style={{
-            textAlign: "left",
-            fontFamily: "Press Start 2P",
-            fontSize: "40px",
-            fontWeight: "bold",
-          }}
-        >
-          MARIO GAME
-        </p>
+        <p className="Instructions">MARIO GAME</p>
         <p className="Instructions">
           INSTRUCTIONS: UP for Jump, DOWN for Down, RIGHT for Right, LEFT for
           Left

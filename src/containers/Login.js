@@ -35,15 +35,7 @@ export default function Login() {
     }
   }
 
-  async function handleForgotPassword(event) {
-    event.preventDefault();
-    try {
-      await Auth.forgotPassword(fields.email);
-      alert("An email has been sent with instructions to reset your password.");
-    } catch (e) {
-      onError(e);
-    }
-  }
+
 
   return (
     <div className="Login">
@@ -74,11 +66,6 @@ export default function Login() {
         >
           Login
         </LoaderButton>
-        <div className="forgotPassword">
-          <a href="/" onClick={handleForgotPassword}>
-            Forgot Password?
-          </a>
-        </div>
       </Form>
     </div>
   );
