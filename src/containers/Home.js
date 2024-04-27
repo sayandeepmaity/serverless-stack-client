@@ -36,7 +36,7 @@ export default function Home() {
     return (
       <>
         <LinkContainer to="/notes/new">
-          <ListGroup.Item action className="py-3 text-nowrap text-truncate">
+          <ListGroup.Item action className="py-3 text-nowrap text-truncate custom-note-item custom-note-new">
             <BsPencilSquare size={17} />
             <span className="ml-2 font-weight-bold">Create a new note</span>
           </ListGroup.Item>

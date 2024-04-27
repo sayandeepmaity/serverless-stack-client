@@ -95,8 +95,7 @@ export default function MarioGame() {
         </button>
         <p className="Instructions">MARIO GAME</p>
         <p className="Instructions">
-          INSTRUCTIONS: UP for Jump, DOWN for Down, RIGHT for Right, LEFT for
-          Left
+          INSTRUCTIONS: UP for Jump
         </p>
       </div>
     </div>

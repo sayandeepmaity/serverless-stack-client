@@ -55,3 +55,16 @@
   border-radius: 5px;
   background-color: #f8f9fa;
 }
+
+@media (max-width: 1000px) {
+  .notes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+@media (max-width: 500px) {
+  .notes-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
