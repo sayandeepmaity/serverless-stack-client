@@ -57,3 +57,27 @@
 .PausePlayButton:hover {
   background-color: #7a45a0;
 }
+
+@media (max-width: 1200px) {
+  .MarioGame {
+    position: relative;
+  width: 920px;
+  height: 500px;
+  }
+}
+
+@media (max-width: 990px) {
+  .MarioGame {
+    position: relative;
+  width: 700px;
+  height: 500px;
+  }
+}
+
+@media (max-width: 770px) {
+  .MarioGame {
+    position: relative;
+  width: 500px;
+  height: 300px;
+  }
+}
