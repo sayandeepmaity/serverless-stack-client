@@ -49,38 +49,13 @@ export default function NewNote({ history }) {
 
   return (
     <div className="NewNote">
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="content">
-          <Form.Control
-            value={content}
-            as="textarea"
-            onChange={(e) => setContent(e.target.value)}
-            placeholder="Write your notes here"
-          />
-        </Form.Group>
-        <Form.Group controlId="file">
-          <Form.Label>Attachment</Form.Label>
-          <Form.Control onChange={handleFileChange} type="file" />
-        </Form.Group>
-        <LoaderButton
-          block
-          type="submit"
-          size="lg"
-          variant="primary"
-          isLoading={isLoading}
-          disabled={!validateForm()}
-        >
-          Create
-        </LoaderButton>
-      </Form>
       <Form onSubmit={handleSearch}>
         <Form.Group controlId="search">
-          <Form.Label>Search on Google</Form.Label>
           <Form.Control
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Enter your search query"
+            placeholder="TYPE TO SEARCH ON GOOGLE"
           />
         </Form.Group>
         <LoaderButton
@@ -92,6 +67,32 @@ export default function NewNote({ history }) {
           Search
         </LoaderButton>
       </Form>
+      <div style={{ marginTop: "20px" }}>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group controlId="content">
+            <Form.Control
+              value={content}
+              as="textarea"
+              onChange={(e) => setContent(e.target.value)}
+              placeholder="Write your notes here"
+            />
+          </Form.Group>
+          <Form.Group controlId="file">
+            <Form.Label>Attachment</Form.Label>
+            <Form.Control onChange={handleFileChange} type="file" />
+          </Form.Group>
+          <LoaderButton
+            block
+            type="submit"
+            size="lg"
+            variant="primary"
+            isLoading={isLoading}
+            disabled={!validateForm()}
+          >
+            Create
+          </LoaderButton>
+        </Form>
+      </div>
     </div>
   );
 }
