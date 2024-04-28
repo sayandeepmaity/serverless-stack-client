@@ -5,7 +5,7 @@ import LoaderButton from "../components/LoaderButton";
 import { useAppContext } from "../libs/contextLib";
 import { useFormFields } from "../libs/hooksLib";
 import { onError } from "../libs/errorLib";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import "./Login.css";
 
 export default function Login() {
@@ -27,15 +27,12 @@ export default function Login() {
     try {
       await Auth.signIn(fields.email, fields.password);
       userHasAuthenticated(true);
-      history.push('/');
+      history.push("/");
     } catch (e) {
       onError(e);
-      console.log(e);
       setIsLoading(false);
     }
   }
-
-
 
   return (
     <div className="Login">
@@ -66,6 +63,9 @@ export default function Login() {
         >
           Login
         </LoaderButton>
+        <div className="signup-link">
+          <p>Don't have an account? <Link to="/signup">Sign up here</Link></p>
+        </div>
       </Form>
     </div>
   );

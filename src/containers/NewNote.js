@@ -11,6 +11,7 @@ export default function NewNote({ history }) {
   const file = useRef(null);
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   function validateForm() {
     return content.length > 0;
@@ -41,6 +42,11 @@ export default function NewNote({ history }) {
     }
   }
 
+  async function handleSearch(event) {
+    event.preventDefault();
+    window.open(`https://www.google.com/search?q=${searchQuery}`, "_blank");
+  }
+
   function createNote(note) {
     return API.post("notes", "/notes", {
       body: note,
@@ -49,30 +55,50 @@ export default function NewNote({ history }) {
 
   return (
     <div className="NewNote">
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="content">
+      <Form onSubmit={handleSearch}>
+        <Form.Group controlId="search">
           <Form.Control
-            value={content}
-            as="textarea"
-            onChange={(e) => setContent(e.target.value)}
-            placeholder="Write your notes here"
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="TYPE HERE TO SEARCH ON GOOGLE"
           />
-        </Form.Group>
-        <Form.Group controlId="file">
-          <Form.Label>Attachment</Form.Label>
-          <Form.Control onChange={handleFileChange} type="file" />
         </Form.Group>
         <LoaderButton
           block
           type="submit"
           size="lg"
           variant="primary"
-          isLoading={isLoading}
-          disabled={!validateForm()}
         >
-          Create
+          Search
         </LoaderButton>
       </Form>
+      <div style={{ marginTop: "20px" }}>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group controlId="content">
+            <Form.Control
+              value={content}
+              as="textarea"
+              onChange={(e) => setContent(e.target.value)}
+              placeholder="Write your notes here"
+            />
+          </Form.Group>
+          <Form.Group controlId="file">
+            <Form.Label>Attachment</Form.Label>
+            <Form.Control onChange={handleFileChange} type="file" />
+          </Form.Group>
+          <LoaderButton
+            block
+            type="submit"
+            size="lg"
+            variant="primary"
+            isLoading={isLoading}
+            disabled={!validateForm()}
+          >
+            Create
+          </LoaderButton>
+        </Form>
+      </div>
     </div>
   );
 }
