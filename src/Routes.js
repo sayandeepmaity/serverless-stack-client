@@ -8,7 +8,6 @@ import Login from "./containers/Login";
 import Signup from "./containers/Signup";
 import NewNote from "./containers/NewNote";
 import Notes from "./containers/Notes";
-import MarioGame from "./containers/MarioGame";
 
 export default function Routes() {
   return (
@@ -27,9 +26,6 @@ export default function Routes() {
       </AuthenticatedRoute>
       <AuthenticatedRoute exact path="/Notes/:id">
         <Notes />
-      </AuthenticatedRoute>
-      <AuthenticatedRoute exact path="/MarioGame">
-        <MarioGame />
       </AuthenticatedRoute>
       <NotFound />
     </Switch>

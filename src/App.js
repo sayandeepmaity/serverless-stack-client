@@ -53,9 +53,6 @@ function App() {
               <Nav activeKey={window.location.pathname}>
                 {isAuthenticated ? (
                   <>
-                    <LinkContainer to="/MarioGame">
-                      <Nav.Link>MarioGame</Nav.Link>
-                    </LinkContainer>
                     <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
                   </>
                 ) : (

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import { LinkContainer } from "react-router-bootstrap";
-import { BsPencilSquare } from "react-icons/bs";
+import { BsPencilSquare, BsTrash } from "react-icons/bs";
 import { useAppContext } from "../libs/contextLib";
 import { onError } from "../libs/errorLib";
 import { API } from "aws-amplify";
@@ -27,9 +27,27 @@ export default function Home() {
     }
     onLoad();
   }, [isAuthenticated]);
-  
+
   function loadNotes() {
     return API.get("notes", "/notes");
+  }
+
+  async function handleDeleteAll() {
+    const confirmed = window.confirm("Are you sure you want to delete all notes?");
+    if (!confirmed) {
+      return;
+    }
+
+    try {
+      await Promise.all(notes.map((note) => deleteNote(note.noteId)));
+      setNotes([]);
+    } catch (e) {
+      onError(e);
+    }
+  }
+
+  function deleteNote(noteId) {
+    return API.del("notes", `/notes/${noteId}`);
   }
 
   function renderNotesList(notes) {
@@ -54,6 +72,16 @@ export default function Home() {
             </ListGroup.Item>
           </LinkContainer>
         ))}
+        {notes.length > 0 && (
+          <ListGroup.Item
+            action
+            className="py-3 text-nowrap text-truncate custom-note-item custom-note-delete-all"
+            onClick={handleDeleteAll}
+          >
+            <BsTrash size={17} />
+            <span className="ml-2 font-weight-bold">Delete All Notes</span>
+          </ListGroup.Item>
+        )}
       </>
     );
   }

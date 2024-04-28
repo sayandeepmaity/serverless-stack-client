@@ -1,26 +1,65 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import { useParams, useHistory } from "react-router-dom";
+import { API, Storage } from "aws-amplify";
+import { onError } from "../libs/errorLib";
 import Form from "react-bootstrap/Form";
 import LoaderButton from "../components/LoaderButton";
 import config from "../config";
-import "./NewNote.css";
-import { onError } from "../libs/errorLib";
+import "./Notes.css";
 import { s3Upload } from "../libs/awsLib";
 
-export default function NewNote({ history }) {
+export default function Notes() {
   const file = useRef(null);
+  const { id } = useParams();
+  const history = useHistory();
+  const [note, setNote] = useState(null);
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    function loadNote() {
+      return API.get("notes", `/notes/${id}`);
+    }
+
+    async function onLoad() {
+      try {
+        const note = await loadNote();
+        const { content, attachment } = note;
+        if (attachment) {
+          note.attachmentURL = await Storage.vault.get(attachment);
+        }
+        setContent(content);
+        setNote(note);
+      } catch (e) {
+        onError(e);
+      }
+    }
+
+    onLoad();
+  }, [id]);
 
   function validateForm() {
     return content.length > 0;
+  }
+
+  function formatFilename(str) {
+    return str.replace(/^\w+-/, "");
   }
 
   function handleFileChange(event) {
     file.current = event.target.files[0];
   }
 
+  function saveNote(note) {
+    return API.put("notes", `/notes/${id}`, {
+      body: note,
+    });
+  }
+
   async function handleSubmit(event) {
+    let attachment;
     event.preventDefault();
     if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
       alert(
@@ -32,9 +71,13 @@ export default function NewNote({ history }) {
     }
     setIsLoading(true);
     try {
-      const attachment = file.current ? await s3Upload(file.current) : null;
-      // For demo purposes, simulate saving the note
-      console.log("Note created:", { content, attachment });
+      if (file.current) {
+        attachment = await s3Upload(file.current);
+      }
+      await saveNote({
+        content,
+        attachment: attachment || note.attachment,
+      });
       history.push("/");
     } catch (e) {
       onError(e);
@@ -47,52 +90,103 @@ export default function NewNote({ history }) {
     window.open(`https://www.google.com/search?q=${searchQuery}`, "_blank");
   }
 
+  function deleteNote() {
+    return API.del("notes", `/notes/${id}`);
+  }
+
+  async function handleDelete(event) {
+    event.preventDefault();
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this note?"
+    );
+    if (!confirmed) {
+      return;
+    }
+    setIsDeleting(true);
+    try {
+      await deleteNote();
+      history.push("/");
+    } catch (e) {
+      onError(e);
+      setIsDeleting(false);
+    }
+  }
+
   return (
-    <div className="NewNote">
-      <Form onSubmit={handleSearch}>
-        <Form.Group controlId="search">
+    <div className="Notes">
+      <Form onSubmit={handleSearch} className="d-flex">
+        <Form.Group controlId="search" className="flex-grow-1 mr-2">
           <Form.Control
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="TYPE TO SEARCH ON GOOGLE"
+            placeholder="Search on Google"
+            style={{ height: "50px" }}
           />
         </Form.Group>
         <LoaderButton
-          block
           type="submit"
           size="lg"
           variant="primary"
+          style={{ height: "50px" }}
         >
           Search
         </LoaderButton>
       </Form>
-      <div style={{ marginTop: "20px" }}>
+      {note && (
         <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="content">
+          <Form.Group controlId="content" style={{ position: 'relative' }}>
             <Form.Control
-              value={content}
               as="textarea"
+              value={content}
               onChange={(e) => setContent(e.target.value)}
-              placeholder="Write your notes here"
+              style={{
+                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px)`,
+                backgroundSize: `20px 20px`,
+                padding: '10px',
+                borderRadius: '5px',
+                border: 'none',
+                width: '100%',
+                height: '200px',
+                backgroundColor: 'white',
+              }}
             />
           </Form.Group>
           <Form.Group controlId="file">
             <Form.Label>Attachment</Form.Label>
+            {note.attachment && (
+              <p>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={note.attachmentURL}
+                >
+                  {formatFilename(note.attachment)}
+                </a>
+              </p>
+            )}
             <Form.Control onChange={handleFileChange} type="file" />
           </Form.Group>
           <LoaderButton
             block
-            type="submit"
             size="lg"
-            variant="primary"
+            type="submit"
             isLoading={isLoading}
             disabled={!validateForm()}
           >
-            Create
+            Save
+          </LoaderButton>
+          <LoaderButton
+            block
+            size="lg"
+            variant="danger"
+            onClick={handleDelete}
+            isLoading={isDeleting}
+          >
+            Delete
           </LoaderButton>
         </Form>
-      </div>
+      )}
     </div>
   );
 }

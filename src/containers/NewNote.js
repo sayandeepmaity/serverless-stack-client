@@ -6,13 +6,14 @@ import "./NewNote.css";
 import { API } from "aws-amplify";
 import { onError } from "../libs/errorLib";
 import { s3Upload } from "../libs/awsLib";
+import { useHistory } from 'react-router-dom';
 
-export default function NewNote({ history }) {
+export default function NewNote() {
   const file = useRef(null);
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-
+  const history = useHistory();
   function validateForm() {
     return content.length > 0;
   }
@@ -55,50 +56,59 @@ export default function NewNote({ history }) {
 
   return (
     <div className="NewNote">
-      <Form onSubmit={handleSearch}>
-        <Form.Group controlId="search">
+      <Form onSubmit={handleSearch} className="d-flex">
+        <Form.Group controlId="search" className="flex-grow-1 mr-2">
           <Form.Control
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="TYPE HERE TO SEARCH ON GOOGLE"
+            placeholder="Search on Google"
+            style={{ height: "50px" }}
           />
+        </Form.Group>
+        <LoaderButton
+          type="submit"
+          size="lg"
+          variant="primary"
+          style={{ height: "50px" }}
+        >
+          Search
+        </LoaderButton>
+      </Form>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="content" style={{ position: 'relative' }}>
+          <Form.Control
+            value={content}
+            as="textarea"
+            onChange={(e) => setContent(e.target.value)}
+            placeholder="Write your notes here"
+            style={{
+              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px)`,
+              backgroundSize: `20px 20px`,
+              padding: '10px',
+              borderRadius: '5px',
+              border: 'none',
+              width: '100%',
+              height: '200px',
+              backgroundColor: 'white',
+            }}
+          />
+        </Form.Group>
+        <Form.Group controlId="file">
+          <Form.Label>Attachment</Form.Label>
+          <Form.Control onChange={handleFileChange} type="file" />
         </Form.Group>
         <LoaderButton
           block
           type="submit"
           size="lg"
           variant="primary"
+          isLoading={isLoading}
+          disabled={!validateForm()}
         >
-          Search
+          Create
         </LoaderButton>
       </Form>
-      <div style={{ marginTop: "20px" }}>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="content">
-            <Form.Control
-              value={content}
-              as="textarea"
-              onChange={(e) => setContent(e.target.value)}
-              placeholder="Write your notes here"
-            />
-          </Form.Group>
-          <Form.Group controlId="file">
-            <Form.Label>Attachment</Form.Label>
-            <Form.Control onChange={handleFileChange} type="file" />
-          </Form.Group>
-          <LoaderButton
-            block
-            type="submit"
-            size="lg"
-            variant="primary"
-            isLoading={isLoading}
-            disabled={!validateForm()}
-          >
-            Create
-          </LoaderButton>
-        </Form>
-      </div>
     </div>
   );
 }
