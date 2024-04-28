@@ -1,5 +1,17 @@
+.Notes{
+  padding: 50px;
+  color: #000000;
+  background-image: url("image/cort.png");
+}
+
+
+
+
+
 .Notes form textarea {
-  height: 350px;
+  height: 300px;
   font-size: 1.5rem;
-  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #ffffff, #ada949);
+  border: 5px solid #eded1a;
+  padding: 10px;
 }
