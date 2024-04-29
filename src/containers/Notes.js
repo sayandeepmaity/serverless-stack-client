@@ -7,6 +7,7 @@ import LoaderButton from "../components/LoaderButton";
 import config from "../config";
 import "./Notes.css";
 import { s3Upload } from "../libs/awsLib";
+import YouTube from 'react-youtube';
 
 export default function Notes() {
   const file = useRef(null);
@@ -17,15 +18,13 @@ export default function Notes() {
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [youtubeSearchQuery, setYoutubeSearchQuery] = useState("");
+  const [youtubeVideoId, setYoutubeVideoId] = useState("");
 
   useEffect(() => {
-    function loadNote() {
-      return API.get("notes", `/notes/${id}`);
-    }
-
-    async function onLoad() {
+    async function loadNote() {
       try {
-        const note = await loadNote();
+        const note = await API.get("notes", `/notes/${id}`);
         const { content, attachment } = note;
         if (attachment) {
           note.attachmentURL = await Storage.vault.get(attachment);
@@ -37,51 +36,64 @@ export default function Notes() {
       }
     }
 
-    onLoad();
+    loadNote();
   }, [id]);
 
   function validateForm() {
-    return content.length > 0;
-  }
-
-  function formatFilename(str) {
-    return str.replace(/^\w+-/, "");
+    return content.trim().length > 0;
   }
 
   function handleFileChange(event) {
     file.current = event.target.files[0];
   }
 
-  function saveNote(note) {
-    return API.put("notes", `/notes/${id}`, {
-      body: note,
-    });
-  }
-
   async function handleSubmit(event) {
-    let attachment;
     event.preventDefault();
-    if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
-      alert(
-        `Please pick a file smaller than ${
-          config.MAX_ATTACHMENT_SIZE / 1000000
-        } MB.`
-      );
+
+    if (!validateForm()) {
       return;
     }
+
     setIsLoading(true);
+
     try {
+      let attachment = note.attachment;
+
       if (file.current) {
         attachment = await s3Upload(file.current);
       }
+
       await saveNote({
         content,
-        attachment: attachment || note.attachment,
+        attachment: attachment || undefined,
       });
+
       history.push("/");
     } catch (e) {
       onError(e);
       setIsLoading(false);
+    }
+  }
+
+  async function handleDelete(event) {
+    event.preventDefault();
+
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this note?"
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    setIsDeleting(true);
+
+    try {
+      await deleteNote();
+      history.push("/");
+    } catch (e) {
+      onError(e);
+      setIsDeleting(false);
     }
   }
 
@@ -90,26 +102,22 @@ export default function Notes() {
     window.open(`https://www.google.com/search?q=${searchQuery}`, "_blank");
   }
 
-  function deleteNote() {
-    return API.del("notes", `/notes/${id}`);
+  async function handleYoutubeSearch(event) {
+    event.preventDefault();
+    const videoIdMatch = youtubeSearchQuery.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+    if (videoIdMatch) {
+      setYoutubeVideoId(videoIdMatch[1]);
+    }
   }
 
-  async function handleDelete(event) {
-    event.preventDefault();
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this note?"
-    );
-    if (!confirmed) {
-      return;
-    }
-    setIsDeleting(true);
-    try {
-      await deleteNote();
-      history.push("/");
-    } catch (e) {
-      onError(e);
-      setIsDeleting(false);
-    }
+  async function saveNote(note) {
+    return API.put("notes", `/notes/${id}`, {
+      body: note,
+    });
+  }
+
+  async function deleteNote() {
+    return API.del("notes", `/notes/${id}`);
   }
 
   return (
@@ -133,6 +141,34 @@ export default function Notes() {
           Search
         </LoaderButton>
       </Form>
+
+      <Form onSubmit={handleYoutubeSearch} className="d-flex">
+        <Form.Group controlId="youtubeSearch" className="flex-grow-1 mr-2">
+          <Form.Control
+            type="text"
+            value={youtubeSearchQuery}
+            onChange={(e) => setYoutubeSearchQuery(e.target.value)}
+            placeholder="Search on YouTube"
+            style={{ height: "50px" }}
+          />
+        </Form.Group>
+        <LoaderButton
+          type="submit"
+          size="lg"
+          variant="primary"
+          style={{ height: "50px" }}
+        >
+          YouTube Search
+        </LoaderButton>
+      </Form>
+
+      {youtubeVideoId && (
+        <div>
+          <YouTube videoId={youtubeVideoId} opts={{ width: '100%', height: '400px' }} />
+          <hr />
+        </div>
+      )}
+
       {note && (
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="content" style={{ position: 'relative' }}>
@@ -147,7 +183,7 @@ export default function Notes() {
                 borderRadius: '5px',
                 border: 'none',
                 width: '100%',
-                height: '200px',
+                height: '400px',
                 backgroundColor: 'white',
               }}
             />
@@ -161,7 +197,7 @@ export default function Notes() {
                   rel="noopener noreferrer"
                   href={note.attachmentURL}
                 >
-                  {formatFilename(note.attachment)}
+                  {note.attachment.replace(/^\w+-/, "")}
                 </a>
               </p>
             )}

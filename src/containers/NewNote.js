@@ -7,13 +7,17 @@ import { API } from "aws-amplify";
 import { onError } from "../libs/errorLib";
 import { s3Upload } from "../libs/awsLib";
 import { useHistory } from 'react-router-dom';
+import YouTube from 'react-youtube';
 
 export default function NewNote() {
   const file = useRef(null);
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [googleSearchQuery, setGoogleSearchQuery] = useState("");
+  const [youtubeSearchQuery, setYoutubeSearchQuery] = useState("");
+  const [youtubeVideoId, setYoutubeVideoId] = useState("");
   const history = useHistory();
+
   function validateForm() {
     return content.length > 0;
   }
@@ -43,9 +47,17 @@ export default function NewNote() {
     }
   }
 
-  async function handleSearch(event) {
+  async function handleGoogleSearch(event) {
     event.preventDefault();
-    window.open(`https://www.google.com/search?q=${searchQuery}`, "_blank");
+    window.open(`https://www.google.com/search?q=${googleSearchQuery}`, "_blank");
+  }
+
+  async function handleYoutubeSearch(event) {
+    event.preventDefault();
+    const videoIdMatch = youtubeSearchQuery.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+    if (videoIdMatch) {
+      setYoutubeVideoId(videoIdMatch[1]);
+    }
   }
 
   function createNote(note) {
@@ -56,12 +68,12 @@ export default function NewNote() {
 
   return (
     <div className="NewNote">
-      <Form onSubmit={handleSearch} className="d-flex">
-        <Form.Group controlId="search" className="flex-grow-1 mr-2">
+      <Form onSubmit={handleGoogleSearch} className="d-flex">
+        <Form.Group controlId="googleSearch" className="flex-grow-1 mr-2">
           <Form.Control
             type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            value={googleSearchQuery}
+            onChange={(e) => setGoogleSearchQuery(e.target.value)}
             placeholder="Search on Google"
             style={{ height: "50px" }}
           />
@@ -72,9 +84,37 @@ export default function NewNote() {
           variant="primary"
           style={{ height: "50px" }}
         >
-          Search
+          Google Search
         </LoaderButton>
       </Form>
+      
+      <Form onSubmit={handleYoutubeSearch} className="d-flex">
+        <Form.Group controlId="youtubeSearch" className="flex-grow-1 mr-2">
+          <Form.Control
+            type="text"
+            value={youtubeSearchQuery}
+            onChange={(e) => setYoutubeSearchQuery(e.target.value)}
+            placeholder="Search on YouTube"
+            style={{ height: "50px" }}
+          />
+        </Form.Group>
+        <LoaderButton
+          type="submit"
+          size="lg"
+          variant="primary"
+          style={{ height: "50px" }}
+        >
+          YouTube Search
+        </LoaderButton>
+      </Form>
+      
+      {youtubeVideoId && (
+        <div>
+          <YouTube videoId={youtubeVideoId} opts={{ width: '100%', height: '400px' }} />
+          <hr />
+        </div>
+      )}
+      
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="content" style={{ position: 'relative' }}>
           <Form.Control
@@ -89,7 +129,7 @@ export default function NewNote() {
               borderRadius: '5px',
               border: 'none',
               width: '100%',
-              height: '200px',
+              height: '400px',
               backgroundColor: 'white',
             }}
           />

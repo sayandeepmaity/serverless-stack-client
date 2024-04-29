@@ -63,7 +63,7 @@ export default function Login() {
         >
           Login
         </LoaderButton>
-        <div className="signup-link">
+        <div className="signup-link" style={{ marginTop: "10px" }}>
           <p>Don't have an account? <Link to="/signup">Sign up here</Link></p>
         </div>
       </Form>
