@@ -1,8 +1,17 @@
 .NewNote {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 100%;
+  height: 100%;
   padding: 50px;
   color: #000000;
-  background-image: url("image/cort.png");
-  
+  background-color: rgba(
+    62,
+    73,
+    224,
+    0.5
+  ); /* Transparent white (50% opacity) */
 }
 
 .NewNote form textarea {
@@ -11,7 +20,4 @@
   background: linear-gradient(to bottom, #ffffff, #e6e034);
   border: 0px solid #eded1a;
   padding: 10px;
-}
-.google-search-bar {
-  height: 36px;
 }

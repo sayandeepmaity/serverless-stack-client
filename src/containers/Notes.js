@@ -4,10 +4,9 @@ import { API, Storage } from "aws-amplify";
 import { onError } from "../libs/errorLib";
 import Form from "react-bootstrap/Form";
 import LoaderButton from "../components/LoaderButton";
-import config from "../config";
 import "./Notes.css";
 import { s3Upload } from "../libs/awsLib";
-import YouTube from 'react-youtube';
+import YouTube from "react-youtube";
 
 export default function Notes() {
   const file = useRef(null);
@@ -17,7 +16,6 @@ export default function Notes() {
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const [youtubeSearchQuery, setYoutubeSearchQuery] = useState("");
   const [youtubeVideoId, setYoutubeVideoId] = useState("");
 
@@ -97,14 +95,11 @@ export default function Notes() {
     }
   }
 
-  async function handleSearch(event) {
-    event.preventDefault();
-    window.open(`https://www.google.com/search?q=${searchQuery}`, "_blank");
-  }
-
   async function handleYoutubeSearch(event) {
     event.preventDefault();
-    const videoIdMatch = youtubeSearchQuery.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+    const videoIdMatch = youtubeSearchQuery.match(
+      /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+    );
     if (videoIdMatch) {
       setYoutubeVideoId(videoIdMatch[1]);
     }
@@ -122,26 +117,6 @@ export default function Notes() {
 
   return (
     <div className="Notes">
-      <Form onSubmit={handleSearch} className="d-flex">
-        <Form.Group controlId="search" className="flex-grow-1 mr-2">
-          <Form.Control
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search on Google"
-            style={{ height: "50px" }}
-          />
-        </Form.Group>
-        <LoaderButton
-          type="submit"
-          size="lg"
-          variant="primary"
-          style={{ height: "50px" }}
-        >
-          Search
-        </LoaderButton>
-      </Form>
-
       <Form onSubmit={handleYoutubeSearch} className="d-flex">
         <Form.Group controlId="youtubeSearch" className="flex-grow-1 mr-2">
           <Form.Control
@@ -164,14 +139,17 @@ export default function Notes() {
 
       {youtubeVideoId && (
         <div>
-          <YouTube videoId={youtubeVideoId} opts={{ width: '100%', height: '400px' }} />
+          <YouTube
+            videoId={youtubeVideoId}
+            opts={{ width: "100%", height: "400px" }}
+          />
           <hr />
         </div>
       )}
 
       {note && (
         <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="content" style={{ position: 'relative' }}>
+          <Form.Group controlId="content" style={{ position: "relative" }}>
             <Form.Control
               as="textarea"
               value={content}
@@ -179,12 +157,12 @@ export default function Notes() {
               style={{
                 backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px)`,
                 backgroundSize: `20px 20px`,
-                padding: '10px',
-                borderRadius: '5px',
-                border: 'none',
-                width: '100%',
-                height: '400px',
-                backgroundColor: 'white',
+                padding: "10px",
+                borderRadius: "5px",
+                border: "none",
+                width: "100%",
+                height: "300px",
+                backgroundColor: "white",
               }}
             />
           </Form.Group>

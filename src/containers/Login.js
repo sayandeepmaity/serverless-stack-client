@@ -38,16 +38,26 @@ export default function Login() {
     <div className="Login">
       <Form onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="email">
-          <Form.Label>Email</Form.Label>
+          <Form.Label style={{ fontWeight: 500, color: "black" }}>
+            Email
+          </Form.Label>
           <Form.Control
             autoFocus
             type="email"
             value={fields.email}
             onChange={handleFieldChange}
+            list="emailSuggestions"
           />
+          <datalist id="emailSuggestions">
+            <option value="example1@example.com" />
+            <option value="example2@example.com" />
+            <option value="example3@example.com" />
+          </datalist>
         </Form.Group>
         <Form.Group size="lg" controlId="password">
-          <Form.Label>Password</Form.Label>
+          <Form.Label style={{ fontWeight: 500, color: "black" }}>
+            Password
+          </Form.Label>
           <Form.Control
             type="password"
             value={fields.password}
@@ -64,7 +74,12 @@ export default function Login() {
           Login
         </LoaderButton>
         <div className="signup-link" style={{ marginTop: "10px" }}>
-          <p>Don't have an account? <Link to="/signup">Sign up here</Link></p>
+          <p>
+            Don't have an account?{" "}
+            <Link to="/signup" style={{ fontWeight: 500, color: "black" }}>
+              Sign up here
+            </Link>
+          </p>
         </div>
       </Form>
     </div>

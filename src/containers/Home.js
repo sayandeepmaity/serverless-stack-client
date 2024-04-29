@@ -11,6 +11,7 @@ export default function Home() {
   const [notes, setNotes] = useState([]);
   const { isAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     async function onLoad() {
@@ -33,7 +34,9 @@ export default function Home() {
   }
 
   async function handleDeleteAll() {
-    const confirmed = window.confirm("Are you sure you want to delete all notes?");
+    const confirmed = window.confirm(
+      "Are you sure you want to delete all notes?"
+    );
     if (!confirmed) {
       return;
     }
@@ -50,16 +53,34 @@ export default function Home() {
     return API.del("notes", `/notes/${noteId}`);
   }
 
+  function handleSearch(event) {
+    setSearchQuery(event.target.value);
+  }
+
   function renderNotesList(notes) {
+    const filteredNotes = notes.filter((note) =>
+      note.content.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     return (
       <>
+        <input
+          type="text"
+          placeholder="Search notes..."
+          value={searchQuery}
+          onChange={handleSearch}
+          className="form-control search-bar mb-3"
+        />
         <LinkContainer to="/notes/new">
-          <ListGroup.Item action className="py-3 text-nowrap text-truncate custom-note-item custom-note-new">
+          <ListGroup.Item
+            action
+            className="py-3 text-nowrap text-truncate custom-note-item custom-note-new"
+          >
             <BsPencilSquare size={17} />
             <span className="ml-2 font-weight-bold">Create a new note</span>
           </ListGroup.Item>
         </LinkContainer>
-        {notes.map(({ noteId, content, createdAt }) => (
+        {filteredNotes.map(({ noteId, content, createdAt }) => (
           <LinkContainer key={noteId} to={`/notes/${noteId}`}>
             <ListGroup.Item action>
               <span className="font-weight-bold">
@@ -90,9 +111,7 @@ export default function Home() {
     return (
       <div className="lander">
         <h1>NESTOPIA</h1>
-        <p className="text-muted">
-          Build the Perfect Nest for Your Thoughts!
-        </p>
+        <p className="text-muted">Build the Perfect Nest for Your Thoughts!</p>
       </div>
     );
   }
@@ -101,8 +120,12 @@ export default function Home() {
     return (
       <div className="notes">
         <h2 className="pb-3 mt-4 mb-3 border-bottom">Welcome to the Nest</h2>
-        <h3 className="pb-3 mt-4 mb-3 border-bottom">Unleash your creativity! Create, delete, and edit your notes with ease</h3>
-        <ListGroup className="notes-grid">{!isLoading && renderNotesList(notes)}</ListGroup>
+        <h3 className="pb-3 mt-4 mb-3 border-bottom">
+          Unleash your creativity! Create, delete, and edit your notes with ease
+        </h3>
+        <ListGroup className="notes-grid">
+          {!isLoading && renderNotesList(notes)}
+        </ListGroup>
       </div>
     );
   }

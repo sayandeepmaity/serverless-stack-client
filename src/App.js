@@ -40,13 +40,20 @@ function App() {
 
   return (
     !isAuthenticating && (
-      <div className="App container py-3">
+      <div className="">
         <Router>
-        <Navbar collapseOnSelect expand="md" className="mb-3 rounded" style={{ backgroundColor:"yellow" }}>
+          <Navbar
+            collapseOnSelect
+            expand="md"
+            style={{ backgroundColor: "white" }}
+          >
             <LinkContainer to="/">
-            <Navbar.Brand className="font-weight-bold text-muted" style={{ color: 'black' }}>
-              Nestopia
-            </Navbar.Brand>
+              <Navbar.Brand
+                className="font-weight-bold text-muted"
+                style={{ color: "black" }}
+              >
+                Nestopia
+              </Navbar.Brand>
             </LinkContainer>
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">

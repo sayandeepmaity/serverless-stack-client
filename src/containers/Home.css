@@ -1,5 +1,12 @@
-
-
+.Home {
+  width: 100%;
+  height: 92vh;
+  background-image: url(image/backlan.gif);
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  overflow: auto;
+}
 
 .Home .lander {
   padding: 80px 0;
@@ -20,9 +27,19 @@
 }
 
 .Home .notes {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  width: 100%;
+  height: 100%;
   padding: 50px;
   color: #000000;
-  background-image: url("image/cort.png");
+  background-color: rgba(
+    62,
+    73,
+    224,
+    0.5
+  ); /* Transparent white (50% opacity) */
 }
 
 .Home .notes h2 {
@@ -64,7 +81,6 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
-
 
 @media (max-width: 500px) {
   .notes-grid {

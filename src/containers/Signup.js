@@ -93,7 +93,9 @@ export default function Signup() {
     return (
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="email" size="lg">
-          <Form.Label>Email</Form.Label>
+          <Form.Label style={{ fontWeight: 500, color: "black" }}>
+            Email
+          </Form.Label>
           <Form.Control
             autoFocus
             type="email"
@@ -102,7 +104,9 @@ export default function Signup() {
           />
         </Form.Group>
         <Form.Group controlId="password" size="lg">
-          <Form.Label>Password</Form.Label>
+          <Form.Label style={{ fontWeight: 500, color: "black" }}>
+            Password
+          </Form.Label>
           <Form.Control
             type="password"
             value={fields.password}
@@ -110,7 +114,9 @@ export default function Signup() {
           />
         </Form.Group>
         <Form.Group controlId="confirmPassword" size="lg">
-          <Form.Label>Confirm Password</Form.Label>
+          <Form.Label style={{ fontWeight: 500, color: "black" }}>
+            Confirm Password
+          </Form.Label>
           <Form.Control
             type="password"
             onChange={handleFieldChange}
