@@ -4,11 +4,5 @@
   width: 100%;
   height: 100vh;
   padding: 50px;
-  color: #000000;
-  background-color: #3e25cf;
-}
-
-.dark-mode .Notes {
-  color: #ffffff;
-  background-color: #0b978e;
+  background-color: #89a4fe;
 }
