@@ -143,7 +143,17 @@ export default function Notes() {
 
       {youtubeVideoId && (
         <div style={{ position: "relative" }}>
-          <button onClick={handleRemoveVideo} style={{ position: "absolute", top: "10px", right: "10px", zIndex: "1000" }}>✕</button>
+          <button
+            onClick={handleRemoveVideo}
+            style={{
+              position: "absolute",
+              top: "10px",
+              right: "10px",
+              zIndex: "1000",
+            }}
+          >
+            ✕
+          </button>
           <YouTube
             videoId={youtubeVideoId}
             opts={{ width: "100%", height: "400px" }}

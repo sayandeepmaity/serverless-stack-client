@@ -26,9 +26,6 @@
   color: #b5ce28;
 }
 
-
-
-
 .Home .notes {
   position: fixed;
   top: 50px;
@@ -37,12 +34,7 @@
   height: 100%;
   padding: 50px;
   color: #000000;
-  background-color: rgba(
-    62,
-    73,
-    224,
-    0.5
-  ); /* Transparent white (50% opacity) */
+  background-color: rgba(62, 73, 224, 0.5);
 }
 
 .dark-mode .Home .notes {
@@ -52,12 +44,7 @@
   width: 100%;
   height: 93%;
   padding: 50px;
-  background-color: rgba(
-    62,
-    73,
-    224,
-    0.5
-  ); /* Transparent white (50% opacity) */
+  background-color: rgba(62, 73, 224, 0.5);
 }
 
 .Home .notes h2 {
@@ -94,7 +81,6 @@
   background-color: #f8f9fa;
 }
 
-
 @media (max-width: 1000px) {
   .notes-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -111,6 +97,7 @@ body.dark-mode {
   filter: invert(1) hue-rotate(180deg);
 }
 
-body.dark-mode img:not([src*=".svg"]), body.dark-mode video {
+body.dark-mode img:not([src*=".svg"]),
+body.dark-mode video {
   filter: invert(1) hue-rotate(180deg);
 }
