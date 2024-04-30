@@ -16,9 +16,9 @@
   margin: 0 auto;
   max-width: 360px;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+  border: 1px solid rgba(31, 60, 225, 0.641);
+    border-radius: 5px;
+    background-color: rgb(49, 75, 225);
 }
 
 .Login form input[type="email"],
@@ -39,7 +39,7 @@
   cursor: pointer;
 }
 
-@media all and (min-width: 480px) {
+@media all and (min-width: 560px) {
   .Login {
     padding: 60px 0;
   }
@@ -53,3 +53,4 @@
     background-color: rgb(49, 75, 225);
   }
 }
+

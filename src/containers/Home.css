@@ -35,7 +35,9 @@
   padding: 50px;
   color: #000000;
   background-color: rgba(62, 73, 224, 0.5);
+  overflow-y: auto; /* Enable vertical scrolling */
 }
+
 
 .dark-mode .Home .notes {
   position: fixed;
