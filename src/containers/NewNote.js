@@ -70,6 +70,31 @@ export default function NewNote() {
     player.addEventListener("onStateChange", () => {
       player.getIframe().style.filter = "none";
     });
+
+    // Handle clicks on timestamps in notes content
+    const timestampRegex = /(\d{1,2}):(\d{2})/g;
+    const contentDiv = document.getElementById("content");
+    contentDiv.innerHTML = content.replace(
+      timestampRegex,
+      '<a href="#" class="timestamp">$&</a>'
+    );
+
+    const timestampLinks = contentDiv.getElementsByClassName("timestamp");
+    for (let i = 0; i < timestampLinks.length; i++) {
+      const timestampLink = timestampLinks[i];
+      timestampLink.onclick = function (e) {
+        e.preventDefault();
+        const timestampParts = timestampLink.innerText.split(":");
+        const timestampSeconds =
+          parseInt(timestampParts[0], 10) * 60 + parseInt(timestampParts[1], 10);
+        gotoTimestamp(timestampSeconds);
+      };
+    }
+  }
+
+  // Function to set current time of the video player
+  function gotoTimestamp(timestamp) {
+    youtubePlayerRef.current.internalPlayer.seekTo(timestamp, true);
   }
 
   function handleRemoveVideo() {

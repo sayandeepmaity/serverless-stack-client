@@ -104,7 +104,3 @@ body.dark-mode video {
   filter: invert(1) hue-rotate(180deg);
 }
 
-body.dark-mode iframe[src*="youtube.com"] {
-  filter: none !important;
-}
-
