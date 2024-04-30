@@ -12,3 +12,7 @@
   color: #ffffff;
   background-color: #0b978e;
 }
+
+body.dark-mode iframe[src*="youtube.com"] {
+  filter: none;
+}
