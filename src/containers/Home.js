@@ -110,7 +110,7 @@ export default function Home() {
   function renderLander() {
     return (
       <div className="lander">
-        <h1>NESTOPIA</h1>
+        <h1>WINGNOTE</h1>
         <p className="text-muted">Build the Perfect Nest for Your Thoughts!</p>
       </div>
     );

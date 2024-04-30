@@ -65,7 +65,7 @@ function App() {
                 className="font-weight-bold text-muted"
                 style={{ color: "black" }}
               >
-                Nestopia
+                Wingnote
               </Navbar.Brand>
             </LinkContainer>
             <Navbar.Toggle />
