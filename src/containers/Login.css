@@ -34,7 +34,7 @@
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #ffff00;
+  background-color: #6b0cd0da;
   color: black;
   cursor: pointer;
 }
@@ -48,8 +48,8 @@
     margin: 0 auto;
     max-width: 360px;
     padding: 20px;
-    border: 1px solid rgba(255, 242, 0, 0.641);
+    border: 1px solid rgba(240, 240, 234, 0.641);
     border-radius: 5px;
-    background-color: rgba(150, 167, 43, 0.748);
+    background-color: rgba(157, 158, 148, 0.748);
   }
 }
