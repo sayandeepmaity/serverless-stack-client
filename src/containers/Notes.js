@@ -115,6 +115,10 @@ export default function Notes() {
     return API.del("notes", `/notes/${id}`);
   }
 
+  function handleRemoveVideo() {
+    setYoutubeVideoId("");
+  }
+
   return (
     <div className="Notes">
       <Form onSubmit={handleYoutubeSearch} className="d-flex">
@@ -123,7 +127,7 @@ export default function Notes() {
             type="text"
             value={youtubeSearchQuery}
             onChange={(e) => setYoutubeSearchQuery(e.target.value)}
-            placeholder="Search on YouTube"
+            placeholder="Search on YouTube, Not all videos may be compatible with dark mode"
             style={{ height: "50px" }}
           />
         </Form.Group>
@@ -138,7 +142,8 @@ export default function Notes() {
       </Form>
 
       {youtubeVideoId && (
-        <div>
+        <div style={{ position: "relative" }}>
+          <button onClick={handleRemoveVideo} style={{ position: "absolute", top: "10px", right: "10px", zIndex: "1000" }}>✕</button>
           <YouTube
             videoId={youtubeVideoId}
             opts={{ width: "100%", height: "400px" }}

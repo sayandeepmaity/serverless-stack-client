@@ -1,4 +1,3 @@
-// App.js
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
@@ -8,11 +7,13 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "./Routes";
 import { AppContext } from "./libs/contextLib";
 import { Auth } from "aws-amplify";
+import { FiSun, FiMoon } from "react-icons/fi"; // Icons from Feather Icons
 
 function App() {
   const history = useHistory();
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   async function handleLogout() {
     await Auth.signOut();
@@ -36,7 +37,19 @@ function App() {
     setIsAuthenticating(false);
   }
 
-  const contextValue = { isAuthenticated, userHasAuthenticated };
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark-mode");
+    }
+  }, [isDarkMode]);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
+  const contextValue = { isAuthenticated, userHasAuthenticated, isDarkMode };
 
   return (
     !isAuthenticating && (
@@ -72,6 +85,9 @@ function App() {
                     </LinkContainer>
                   </>
                 )}
+                <Nav.Link onClick={toggleDarkMode}>
+                  {isDarkMode ? <FiSun /> : <FiMoon />} {/* Different icons */}
+                </Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Navbar>

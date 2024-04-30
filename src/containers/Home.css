@@ -1,6 +1,6 @@
 .Home {
   width: 100%;
-  height: 92vh;
+  height: 92.5vh;
   background-image: url(image/backlan.gif);
   position: relative;
   background-size: cover;
@@ -26,6 +26,9 @@
   color: #b5ce28;
 }
 
+
+
+
 .Home .notes {
   position: fixed;
   top: 50px;
@@ -34,6 +37,21 @@
   height: 100%;
   padding: 50px;
   color: #000000;
+  background-color: rgba(
+    62,
+    73,
+    224,
+    0.5
+  ); /* Transparent white (50% opacity) */
+}
+
+.dark-mode .Home .notes {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  width: 100%;
+  height: 93%;
+  padding: 50px;
   background-color: rgba(
     62,
     73,
@@ -76,6 +94,7 @@
   background-color: #f8f9fa;
 }
 
+
 @media (max-width: 1000px) {
   .notes-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -86,4 +105,12 @@
   .notes-grid {
     grid-template-columns: repeat(1, 1fr);
   }
+}
+
+body.dark-mode {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+body.dark-mode img:not([src*=".svg"]), body.dark-mode video {
+  filter: invert(1) hue-rotate(180deg);
 }

@@ -15,6 +15,7 @@ export default function NewNote() {
   const [isLoading, setIsLoading] = useState(false);
   const [youtubeSearchQuery, setYoutubeSearchQuery] = useState("");
   const [youtubeVideoId, setYoutubeVideoId] = useState("");
+  const youtubePlayerRef = useRef(null);
   const history = useHistory();
 
   function validateForm() {
@@ -62,6 +63,19 @@ export default function NewNote() {
     });
   }
 
+  function onYouTubePlayerReady(event) {
+    const player = event.target;
+    player.getIframe().style.filter = "none";
+
+    player.addEventListener("onStateChange", () => {
+      player.getIframe().style.filter = "none";
+    });
+  }
+
+  function handleRemoveVideo() {
+    setYoutubeVideoId("");
+  }
+
   return (
     <div className="NewNote">
       <Form onSubmit={handleYoutubeSearch} className="d-flex">
@@ -70,7 +84,7 @@ export default function NewNote() {
             type="text"
             value={youtubeSearchQuery}
             onChange={(e) => setYoutubeSearchQuery(e.target.value)}
-            placeholder="Search on YouTube"
+            placeholder="Search on YouTube, Not all videos may be compatible with dark mode"
             style={{ height: "50px" }}
           />
         </Form.Group>
@@ -85,10 +99,13 @@ export default function NewNote() {
       </Form>
 
       {youtubeVideoId && (
-        <div>
+        <div style={{ position: "relative" }}>
+          <button onClick={handleRemoveVideo} style={{ position: "absolute", top: "10px", right: "10px", zIndex: "1000" }}>✕</button>
           <YouTube
             videoId={youtubeVideoId}
             opts={{ width: "100%", height: "400px" }}
+            onReady={onYouTubePlayerReady}
+            ref={youtubePlayerRef}
           />
           <hr />
         </div>

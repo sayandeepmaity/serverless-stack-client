@@ -1,23 +1,18 @@
 .Notes {
   position: absolute;
-  top: 50px;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   padding: 50px;
   color: #000000;
-  background-color: rgba(
-    62,
-    73,
-    224,
-    0.5
-  );
+  background-color: #3e25cf; /* Replace with your desired background color */
 }
 
-.Notes form textarea {
-  height: 300px;
-  font-size: 1.5rem;
-  background: linear-gradient(to bottom, #ffffff, #ada949);
-  border: 0px solid #eded1a;
-  padding: 10px;
+
+
+
+.dark-mode .Notes {
+  color: #ffffff;
+  background-color: #0b978e;
 }
+/* Add this CSS to your existing CSS file or create a new CSS file and import it into your component */
