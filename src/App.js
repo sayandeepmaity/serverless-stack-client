@@ -85,7 +85,7 @@ function App() {
                     </LinkContainer>
                   </>
                 )}
-                <Nav.Link onClick={toggleDarkMode}>
+                <Nav.Link onClick={toggleDarkMode} style={{ fontWeight: "bold" }}>
                   {isDarkMode ? <FiSun /> : <FiMoon />} {/* Different icons */}
                 </Nav.Link>
               </Nav>

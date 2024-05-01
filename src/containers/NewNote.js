@@ -86,7 +86,8 @@ export default function NewNote() {
         e.preventDefault();
         const timestampParts = timestampLink.innerText.split(":");
         const timestampSeconds =
-          parseInt(timestampParts[0], 10) * 60 + parseInt(timestampParts[1], 10);
+          parseInt(timestampParts[0], 10) * 60 +
+          parseInt(timestampParts[1], 10);
         gotoTimestamp(timestampSeconds);
       };
     }
@@ -154,6 +155,8 @@ export default function NewNote() {
             onChange={(e) => setContent(e.target.value)}
             placeholder="Write your notes here"
             style={{
+              fontWeight: "bold",
+              fontSize: "22px",
               backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px)`,
               backgroundSize: `20px 20px`,
               padding: "10px",
@@ -165,9 +168,13 @@ export default function NewNote() {
             }}
           />
         </Form.Group>
-        <Form.Group controlId="file">
-          <Form.Label>Attachment</Form.Label>
-          <Form.Control onChange={handleFileChange} type="file" />
+        <Form.Group controlId="file" className="d-flex align-items-center">
+          <Form.Label className="highlighted-label mr-2 mb-0">
+            Attachment
+          </Form.Label>
+          <div className="flex-grow-1">
+            <Form.Control onChange={handleFileChange} type="file" />
+          </div>
         </Form.Group>
         <LoaderButton
           block

@@ -4,9 +4,9 @@ import { API, Storage } from "aws-amplify";
 import { onError } from "../libs/errorLib";
 import Form from "react-bootstrap/Form";
 import LoaderButton from "../components/LoaderButton";
-import "./Notes.css";
-import { s3Upload } from "../libs/awsLib";
 import YouTube from "react-youtube";
+import { s3Upload } from "../libs/awsLib";
+import "./Notes.css";
 
 export default function Notes() {
   const file = useRef(null);
@@ -170,6 +170,8 @@ export default function Notes() {
               value={content}
               onChange={(e) => setContent(e.target.value)}
               style={{
+                fontWeight: "bold",
+                fontSize: "22px",
                 backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px)`,
                 backgroundSize: `20px 20px`,
                 padding: "10px",
@@ -181,10 +183,12 @@ export default function Notes() {
               }}
             />
           </Form.Group>
-          <Form.Group controlId="file">
-            <Form.Label>Attachment</Form.Label>
+          <Form.Group controlId="file" className="d-flex align-items-center">
+            <Form.Label className="highlighted-label mr-2 mb-0">
+              Attachment
+            </Form.Label>
             {note.attachment && (
-              <p>
+              <p className="mb-0 mr-2">
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
