@@ -137,7 +137,7 @@ export default function Notes() {
           variant="primary"
           style={{ height: "50px" }}
         >
-          YouTube Search
+          Search
         </LoaderButton>
       </Form>
 

@@ -1,7 +1,7 @@
 .Login {
   width: 100%;
-  height: 92.5vh;
-  background-image: url(image/run.gif);
+  height: 96vh;
+  background-image: url(image/run1.gif);
   position: relative;
   background-size: cover;
   background-position: center;
@@ -41,9 +41,15 @@
 
 
 
-@media all and (min-width: 560px) {
+@media all and (min-width: 1180px) {
   .Login {
-    padding: 60px 0;
+  width: 100%;
+  height: 96vh;
+  background-image: url(image/run.gif);
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  overflow: auto;
   }
 
   .Login form {
