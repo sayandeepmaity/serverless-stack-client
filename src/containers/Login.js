@@ -1,3 +1,4 @@
+// Login.js
 import React, { useState } from "react";
 import { Auth } from "aws-amplify";
 import Form from "react-bootstrap/Form";
@@ -38,26 +39,16 @@ export default function Login() {
     <div className="Login">
       <Form onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="email">
-          <Form.Label style={{ fontWeight: 500, color: "black" }}>
-            Email
-          </Form.Label>
+          <Form.Label>Email</Form.Label>
           <Form.Control
             autoFocus
             type="email"
             value={fields.email}
             onChange={handleFieldChange}
-            list="emailSuggestions"
           />
-          <datalist id="emailSuggestions">
-            <option value="example1@example.com" />
-            <option value="example2@example.com" />
-            <option value="example3@example.com" />
-          </datalist>
         </Form.Group>
         <Form.Group size="lg" controlId="password">
-          <Form.Label style={{ fontWeight: 500, color: "black" }}>
-            Password
-          </Form.Label>
+          <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
             value={fields.password}
@@ -73,6 +64,13 @@ export default function Login() {
         >
           Login
         </LoaderButton>
+        <div className="signup-link" style={{ marginTop: "10px" }}>
+          <p>
+            <Link to="/ResetPassword" style={{ fontWeight: 500, color: "black" }}>
+              Forgot your password?
+            </Link>
+          </p>
+        </div>
         <div className="signup-link" style={{ marginTop: "10px" }}>
           <p>
             Don't have an account?{" "}

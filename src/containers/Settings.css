@@ -1,0 +1,31 @@
+/* Settings.css */
+
+.settings-container {
+  padding: 20px;
+  background-color: #f7f7f7;
+  background-image: url('image/settings.gif');
+  background-size: cover;
+  background-position: center;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.Settings {
+  max-width: 400px;
+  height: 660px;
+  margin: 0 auto;
+}
+
+.settings-link {
+  margin-bottom: 10px;
+}
+
+.LoaderButton {
+  background-color: #28a745; /* Green background color */
+  color: #fff; /* White text color */
+  border: none;
+}
+
+.LoaderButton:hover {
+  background-color: #218838; /* Darker green on hover */
+}

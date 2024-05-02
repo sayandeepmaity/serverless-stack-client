@@ -1,0 +1,39 @@
+/* ChangeEmail.css */
+
+.ChangeEmail {
+    padding: 10px;
+    background-image: url(image/settings.gif);
+    background-size:cover;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .ChangeEmail form {
+    max-width: 400px;
+    margin: 0 auto;
+    height: 665px;
+    
+  }
+  
+  .ChangeEmail .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .ChangeEmail .form-label {
+    font-weight: bold;
+  }
+  
+  .ChangeEmail .form-control {
+    width: 100%;
+  }
+  
+  .ChangeEmail .loader-button {
+    background-color: #007bff; /* Blue background color */
+    color: #fff; /* White text color */
+    border: none;
+  }
+  
+  .ChangeEmail .loader-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
