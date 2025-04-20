@@ -13,7 +13,6 @@ This project is a *Note-Making Application* developed using the *Serverless Fram
 
 Here’s a breakdown of the folder structure:
 
-Absolutely! To preserve proper **indentation and formatting** in your GitHub `README.md`, wrap the folder structure within a **code block** using triple backticks (```) and specify the language as `bash` or leave it as plain text. Here's the ready-to-copy version:
 
 ### 📁 Project Structure
 
